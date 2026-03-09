@@ -1,158 +1,288 @@
-# Financial Code: Walking Tour of Nizhny Novgorod
+# ФинКод: Нижний Новгород — по стопам мошенника
 
-Mobile-first SPA for a self-guided financial literacy tour. The app is static-hosting friendly and deployable to GitHub Pages.
+Интерактивный городской маршрут по финансовой истории Нижнего Новгорода.
 
-## Current implementation stage
+Проект объединяет **городскую экскурсию**, **истории мошенничества**, **финансовую грамотность** и **геймификацию**. Пользователь проходит маршрут по реальным точкам города, слушает аудио-истории, выполняет задания и читает статьи, раскрывающие тему доверия, финансовых рисков и афер.
 
-Step 2 is implemented:
+Проект разработан как **мобильное веб-приложение**, которое можно открыть прямо в браузере без установки.
 
-- project structure
-- core services (content/storage/state/audio/route engine/router)
-- Yandex Maps integration
-- geolocation tracking with unlock-by-radius and manual fallback
-- audio system (play/pause/stop/speed with local persistence)
-- task system (locked/available/completed)
-- article system (locked/available + detail pages with related point)
+---
 
-## Tech stack
+# Идея проекта
+
+Финансовая грамотность часто подается в виде сухих лекций и теории.
+
+Мы решили показать, что **истории денег, доверия и мошенничества — это часть городской культуры**.
+
+Маршрут проводит пользователя по значимым точкам Нижнего Новгорода:
+
+- исторические банки
+- торговые площади
+- места финансовых афер
+- ключевые экономические центры города
+
+Каждая точка раскрывает:
+
+- историческую историю
+- сюжет мошенничества или финансового риска
+- вывод о финансовой грамотности
+
+Пользователь не просто читает — он **исследует город**.
+
+---
+
+# Основные возможности
+
+### Интерактивный маршрут
+
+Пользователь проходит маршрут по городу и открывает контент по мере продвижения.
+
+---
+
+### Геолокация
+
+Приложение определяет положение пользователя и автоматически открывает следующую точку маршрута.
+
+Используется:
+
+- **Yandex Maps API**
+- **Browser Geolocation API**
+
+Если геолокация недоступна, можно подтвердить точку вручную.
+
+---
+
+### Аудиогид
+
+Каждая точка маршрута содержит аудио-рассказ.
+
+Пользователь может:
+
+- слушать историю места
+- менять скорость воспроизведения
+- ставить на паузу
+
+---
+
+### Задания
+
+После достижения точки открывается задание:
+
+- загадка
+- кроссворд
+- наблюдение
+- фото-задание
+
+Это превращает экскурсию в **квест**.
+
+---
+
+### Статьи
+
+Каждая точка сопровождается статьей:
+
+- исторический контекст
+- сюжет мошенничества
+- современный финансовый вывод
+
+---
+
+### Прогресс пользователя
+
+Приложение сохраняет:
+
+- пройденные точки
+- выполненные задания
+- открытые статьи
+- завершенные маршруты
+
+Данные сохраняются в **localStorage**.
+
+---
+
+### Демо-режим
+
+Для презентаций и тестирования доступен **demo-mode**, который позволяет проходить маршрут без GPS.
+
+---
+
+# Архитектура
+
+Приложение построено как **статическое SPA**, которое можно размещать на GitHub Pages.
+
+Это сделано специально, чтобы приложение:
+
+- запускалось без сервера
+- работало как MVP
+- легко масштабировалось в будущем
+
+---
+
+## Технологии
 
 - Vite
-- Vanilla JavaScript (ES modules)
-- Modern CSS
-- Yandex Maps JS API
+- Vanilla JavaScript (ES Modules)
+- HTML5
+- CSS
+- Yandex Maps API
 - Browser Geolocation API
 - HTML5 Audio API
+- GitHub Pages
 
-## Architecture
+---
 
-- `src/pages`: route-level pages
-- `src/components`: reusable UI blocks
-- `src/services`: content, map, geolocation, audio, storage, route engine
-- `src/state`: centralized local state with persistence
-- `src/utils`: router + helpers
-- `src/data`: JSON content and config
+## Структура проекта
+src/
+assets/
+images/
+audio/
+components/
+navbar.js
+audioPlayer.js
+mapPanel.js
+pointModal.js
+progressBar.js
+mascotCat.js
+pages/
+home.js
+excursions.js
+transport.js
+run.js
+tasks.js
+taskDetails.js
+articles.js
+articleDetails.js
+profile.js
+about.js
+services/
+contentService.js
+geolocationService.js
+mapService.js
+audioService.js
+routeEngine.js
+storage.js
+state/
+store.js
+data/
+routes.json
+points.json
+tasks.json
+articles.json
+config.json
+styles/
+base.css
+layout.css
+components.css
+pages.css
+main.js
 
-## Setup
 
-1. Install dependencies:
+---
 
-```bash
-npm install
-```
+# Маскот проекта
 
-2. Run dev server:
+Пользователя сопровождает **кот-проводник** — хитрый городской персонаж, который:
 
-```bash
-npm run dev
-```
+- рассказывает истории
+- подсказывает по маршруту
+- сопровождает задания
 
-3. Open local app URL from Vite output.
+Он является визуальным символом проекта и проводником по миру городских афер и финансовых историй.
 
-## Configure Yandex Maps API key
+---
 
-1. Copy `src/data/config.example.json` to `src/data/config.json`.
-2. Put your key into `YANDEX_MAPS_API_KEY`.
+# Маршруты
 
-`src/data/config.json` format:
+В приложении предусмотрено несколько маршрутов:
 
-```json
+1. **Нижний Новгород: по стопам мошенника**
+2. Истории финансовых афер города
+3. Банковская история Нижнего Новгорода
+
+Каждый маршрут включает:
+
+- набор точек
+- аудио-гид
+- статьи
+- задания
+
+---
+
+# Запуск проекта
+
+## Установка
+
+```npm install```
+
+---
+
+# Маскот проекта
+
+Пользователя сопровождает **кот-проводник** — хитрый городской персонаж, который:
+
+- рассказывает истории
+- подсказывает по маршруту
+- сопровождает задания
+
+Он является визуальным символом проекта и проводником по миру городских афер и финансовых историй.
+
+---
+
+# Маршруты
+
+В приложении предусмотрено несколько маршрутов:
+
+1. **Нижний Новгород: по стопам мошенника**
+2. Истории финансовых афер города
+3. Банковская история Нижнего Новгорода
+
+Каждый маршрут включает:
+
+- набор точек
+- аудио-гид
+- статьи
+- задания
+
+---
+
+# Запуск проекта
+
+## Установка
+
+```npm install```
+
+Настройка карты
+
+Для работы карты необходимо добавить ключ Yandex Maps.
+Файл:
+src/data/config.json
+Пример:
 {
-  "YANDEX_MAPS_API_KEY": "your_key_here"
+  "YANDEX_MAPS_API_KEY": "ВАШ_API_KEY"
 }
-```
-
-Security note:
-
-- keep `src/data/config.json` with empty value in public repositories
-- do not commit real production keys
-
-If key is empty, map panel shows:
-
-`Map is unavailable. Please configure Yandex Maps API key.`
-
-Geolocation fallback:
-
-- if permission is denied, the app shows `I reached the point` button.
-- if GPS is unstable/unavailable, you can proceed manually.
-
-Demo mode (for live defense):
-
-- open route with `#/run?demo=1`, or
-- use `Enable demo mode` button on the Run page.
-
-In demo mode, manual progression controls are always available.
-
-## Build
-
-```bash
-npm run build
-```
-
-Production files are generated in `dist/`.
-
-For GitHub Pages-specific build (relative asset paths):
-
-```bash
-npm run build:pages
-```
-
-## Deploy to GitHub Pages
-
-1. Push repository to GitHub.
-2. Ensure default branch is `main`.
-3. In repository settings:
-   - Go to `Settings` -> `Pages`.
-   - Set source to `GitHub Actions`.
-4. Push to `main` (or run workflow manually).
-5. Workflow `.github/workflows/deploy.yml` builds with `npm run build:pages` and deploys `dist`.
-
-## Final local testing checklist
-
-1. `npm install`
-2. `npm run dev`
-3. Open `#/run`:
-   - verify map fallback without API key
-   - verify map loads with valid key
-   - verify geolocation status updates
-   - verify manual `I reached the point` fallback works
-   - verify audio play/pause/stop/speed
-4. Verify tasks and articles unlock after point reach.
-5. Refresh the page and verify progress persistence.
-6. `npm run build:pages`
-
-## Local state model
-
-User progress is stored in `localStorage`:
-
-- `profile`
-- `selectedRouteId`
-- `selectedTransport`
-- `currentPointIndex`
-- `reachedPoints`
-- `unlockedTasks`
-- `completedTasks`
-- `unlockedArticles`
-- `finishedRoutes`
-- `audioSpeed`
-- `lastKnownPosition`
-
-## Routing
-
-Hash router is used for GitHub Pages compatibility:
-
-- `#/home`
-- `#/excursions`
-- `#/transport`
-- `#/run`
-- `#/tasks`
-- `#/tasks/:taskId`
-- `#/articles`
-- `#/articles/:articleId`
-- `#/profile`
-- `#/about`
-
-## Future improvements
-
-- move API key to encrypted runtime injection (for private production deployments)
-- add richer offline map fallback and cached content bundle
-- add automated unit/e2e tests for route progression and unlock logic
+Если ключ отсутствует — карта не будет загружена, но приложение продолжит работать.
+# Деплой на GitHub Pages
+Проект автоматически деплоится через GitHub Actions.
+Шаги
+Откройте репозиторий
+Перейдите в
+Settings → Pages
+Выберите
+Source: GitHub Actions
+После push в основную ветку GitHub автоматически:
+соберет проект
+задеплоит сайт
+#Демо
+Рабочая версия проекта:
+https://mrprovans.github.io/NN_FINEc/
+# Возможные улучшения
+Будущие версии проекта могут включать:
+backend для хранения статистики
+пользовательские аккаунты
+рейтинг пользователей
+дополнительные маршруты
+офлайн-режим
+систему достижений
+AR-элементы маршрута
+# Авторы
+Проект разработан командой в рамках образовательного хакатона.
