@@ -74,7 +74,7 @@ export async function homePage(ctx) {
     </section>
 
     ${card({
-      title: "Текущая сессия",
+      title: "Ваш маршрут",
       subtitle: `Доступно маршрутов: ${routes.length}`,
       body: routeSummary,
     })}

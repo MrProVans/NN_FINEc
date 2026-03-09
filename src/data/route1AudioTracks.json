@@ -5,5 +5,8 @@
   { "routeId": "route-1", "pointId": "point-4", "order": 4, "title": "Выставочный зал «Покровка, 8»", "src": "./assets/audio/route1/point-04.mp3" },
   { "routeId": "route-2", "pointId": "point-5", "order": 1, "title": "Мытный рынок", "src": "./assets/audio/route1/point-05.mp3" },
   { "routeId": "route-2", "pointId": "point-6", "order": 2, "title": "Площадь Минина и Пожарского", "src": "./assets/audio/route1/point-06.mp3" },
-  { "routeId": "route-2", "pointId": "point-7", "order": 3, "title": "Никольская башня", "src": "./assets/audio/route1/point-07.mp3" }
+  { "routeId": "route-2", "pointId": "point-7", "order": 3, "title": "Никольская башня", "src": "./assets/audio/route1/point-07.mp3" },
+  { "routeId": "route-3", "pointId": "point-8", "order": 1, "title": "Ночлежный дом Бугрова", "src": "./assets/audio/route1/point-08.mp3" },
+  { "routeId": "route-3", "pointId": "point-9", "order": 2, "title": "Банк С.М. Рукавишникова", "src": "./assets/audio/route1/point-09.mp3" },
+  { "routeId": "route-3", "pointId": "point-10", "order": 3, "title": "Волжско-Камский банк", "src": "./assets/audio/route1/point-10.mp3" }
 ]

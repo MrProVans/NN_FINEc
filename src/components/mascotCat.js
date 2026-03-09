@@ -4,7 +4,7 @@ const MASCOT_VARIANTS = {
     title: "Кот-проводник",
   },
   excursions: {
-    src: "./assets/mascot/cat-phone.png",
+    src: "./assets/mascot/cat-guide.png",
     title: "Кот-следопыт",
   },
   transport: {
@@ -12,7 +12,7 @@ const MASCOT_VARIANTS = {
     title: "Кот в пути",
   },
   run: {
-    src: "./assets/mascot/cat-guide.png",
+    src: "./assets/mascot/cat-phone.png",
     title: "Кот на маршруте",
   },
   task: {

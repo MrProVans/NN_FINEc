@@ -26,7 +26,7 @@ export function audioPlayer({ pointId, audioSrc, speed }) {
           `).join("")}
         </select>
       </div>
-      <div class="audio-player__status" data-audio-status>${hasAudioSrc ? "Готово" : "Аудио недоступно"}</div>
+      <div class="audio-player__status" data-audio-status>${hasAudioSrc ? "Готово" : "Аудио недоступно для этой точки."}</div>
     </section>
   `;
 }
@@ -57,7 +57,7 @@ export function bindAudioPlayer(root, { audioService }) {
     if (action === "play") {
       if (!src) {
         if (statusNode) {
-          statusNode.textContent = "Для этой точки нет аудио.";
+          statusNode.textContent = "Аудио недоступно для этой точки.";
         }
         return;
       }
@@ -103,7 +103,7 @@ export function bindAudioPlayer(root, { audioService }) {
 
     if (!snapshot.src) {
       if (!hasAudioSrc) {
-        statusNode.textContent = "Аудио недоступно";
+        statusNode.textContent = "Аудио недоступно для этой точки.";
         return;
       }
 

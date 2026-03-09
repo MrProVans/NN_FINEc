@@ -28,5 +28,20 @@
       "car": 50
     },
     "points": ["point-5", "point-6", "point-7"]
+  },
+  {
+    "id": "route-3",
+    "slug": "yarmarochnyy-sled",
+    "title": "Ярмарочный след мошенника",
+    "description": "Маршрут по купеческим адресам, где решали судьбу сделок, долгов и доверия.",
+    "theme": "Репутация, банки и финансовые ловушки в центре Нижнего",
+    "coverImage": "./assets/images/routes/route3.jpg",
+    "startPointId": "point-8",
+    "transportDurations": {
+      "walk": 75,
+      "scooter": 55,
+      "car": 40
+    },
+    "points": ["point-8", "point-9", "point-10"]
   }
 ]

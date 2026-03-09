@@ -16,7 +16,7 @@ export function navbar({ active = "home" } = {}) {
     <header class="topbar">
       <div class="topbar__brand">
         <span class="topbar__title">Нижний Новгород: по стопам мошенника</span>
-        <span class="topbar__subtitle">Исторический маршрут по финансовым аферам</span>
+        <span class="topbar__subtitle">Иммерсивный маршрут по финансовой истории, городским аферам и культуре доверия</span>
       </div>
       <nav class="topbar__nav" aria-label="Навигация">
         ${NAV_ITEMS.map((item) => `
