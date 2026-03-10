@@ -64,6 +64,12 @@ img {
   text-align: center;
 }
 
+.hero .inline-actions {
+  margin-top: 20px; 
+  display: flex;     
+  gap: 10px;         
+}
+
 .stack {
   display: grid;
   gap: 12px;
