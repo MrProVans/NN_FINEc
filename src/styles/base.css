@@ -54,6 +54,16 @@ img {
   color: var(--muted);
 }
 
+.topbar__nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.topbar__brand {
+  text-align: center;
+}
+
 .stack {
   display: grid;
   gap: 12px;
