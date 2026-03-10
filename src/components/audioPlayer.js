@@ -11,10 +11,10 @@ export function audioPlayer({ pointId, audioSrc, speed }) {
     <section class="audio-player" data-audio-player data-point-id="${pointId}" data-audio-src="${audioSrc}">
       <div class="audio-player__controls">
         ${button({
-    label: "Слушать аудио",
-    variant: "primary",
-    attrs: `data-audio-action="play" ${hasAudioSrc ? "" : "disabled"}`,
-  })}
+          label: "Слушать аудио",
+          variant: "primary",
+          attrs: `data-audio-action="play" ${hasAudioSrc ? "" : "disabled"}`,
+        })}
         ${button({ label: "Пауза", attrs: 'data-audio-action="pause"' })}
         ${button({ label: "Стоп", attrs: 'data-audio-action="stop"' })}
       </div>
@@ -114,8 +114,8 @@ export function bindAudioPlayer(root, { audioService }) {
     const nowPlaying = snapshot.isPlaying ? "Играет" : "Пауза";
     const hasDuration = snapshot.duration > 0;
     const timeline = hasDuration
-        ? ` · ${formatTime(snapshot.currentTime)}/${formatTime(snapshot.duration)}`
-        : "";
+      ? ` · ${formatTime(snapshot.currentTime)}/${formatTime(snapshot.duration)}`
+      : "";
 
     statusNode.textContent = `${nowPlaying} ${snapshot.speed}x${timeline}`;
   });
