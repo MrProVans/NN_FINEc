@@ -18,7 +18,7 @@
 
 html,
 body {
-  margin: 0;
+  margin: 100;
   min-height: 100%;
 }
 
@@ -38,7 +38,7 @@ h1,
 h2,
 h3,
 p {
-  margin: 0;
+  margin: 100;
 }
 
 a {
@@ -70,7 +70,6 @@ img {
 }
 
 .inline-actions {
-  margin-top: 100 px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
