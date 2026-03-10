@@ -5,22 +5,28 @@ import { button } from "./button.js";
  * @param {{ pointId: string, audioSrc: string, speed: number }} options
  */
 export function audioPlayer({ pointId, audioSrc, speed }) {
+  const hasAudioSrc = typeof audioSrc === "string" && audioSrc.trim() !== "";
+
   return `
     <section class="audio-player" data-audio-player data-point-id="${pointId}" data-audio-src="${audioSrc}">
       <div class="audio-player__controls">
-        ${button({ label: "Play", variant: "primary", attrs: 'data-audio-action="play"' })}
-        ${button({ label: "Pause", attrs: 'data-audio-action="pause"' })}
-        ${button({ label: "Stop", attrs: 'data-audio-action="stop"' })}
+        ${button({
+          label: "Слушать аудио",
+          variant: "primary",
+          attrs: `data-audio-action="play" ${hasAudioSrc ? "" : "disabled"}`,
+        })}
+        ${button({ label: "Пауза", attrs: 'data-audio-action="pause"' })}
+        ${button({ label: "Стоп", attrs: 'data-audio-action="stop"' })}
       </div>
       <div class="audio-player__settings">
-        <label class="audio-player__label" for="speed-${pointId}">Speed</label>
+        <label class="audio-player__label" for="speed-${pointId}">Скорость</label>
         <select id="speed-${pointId}" class="audio-player__speed" data-audio-speed>
           ${ALLOWED_AUDIO_SPEEDS.map((value) => `
             <option value="${value}" ${value === speed ? "selected" : ""}>${value}x</option>
           `).join("")}
         </select>
       </div>
-      <div class="audio-player__status" data-audio-status>Ready</div>
+      <div class="audio-player__status" data-audio-status>${hasAudioSrc ? "Готово" : "Аудио недоступно для этой точки."}</div>
     </section>
   `;
 }
@@ -36,6 +42,7 @@ export function bindAudioPlayer(root, { audioService }) {
   }
 
   const src = wrapper.getAttribute("data-audio-src") || "";
+  const hasAudioSrc = src.trim() !== "";
   const statusNode = wrapper.querySelector("[data-audio-status]");
   const speedNode = /** @type {HTMLSelectElement | null} */ (wrapper.querySelector("[data-audio-speed]"));
 
@@ -48,11 +55,18 @@ export function bindAudioPlayer(root, { audioService }) {
     }
 
     if (action === "play") {
+      if (!src) {
+        if (statusNode) {
+          statusNode.textContent = "Аудио недоступно для этой точки.";
+        }
+        return;
+      }
+
       try {
         await audioService.play(src);
       } catch {
         if (statusNode) {
-          statusNode.textContent = "Audio failed to start.";
+          statusNode.textContent = "Аудио недоступно для этой точки.";
         }
       }
       return;
@@ -83,16 +97,21 @@ export function bindAudioPlayer(root, { audioService }) {
     }
 
     if (snapshot.hasError) {
-      statusNode.textContent = snapshot.errorMessage || "Audio is unavailable.";
+      statusNode.textContent = snapshot.errorMessage || "Аудио недоступно.";
       return;
     }
 
     if (!snapshot.src) {
-      statusNode.textContent = `Ready ${snapshot.speed}x`;
+      if (!hasAudioSrc) {
+        statusNode.textContent = "Аудио недоступно для этой точки.";
+        return;
+      }
+
+      statusNode.textContent = `Готово · ${snapshot.speed}x`;
       return;
     }
 
-    const nowPlaying = snapshot.isPlaying ? "Playing" : "Paused";
+    const nowPlaying = snapshot.isPlaying ? "Играет" : "Пауза";
     const hasDuration = snapshot.duration > 0;
     const timeline = hasDuration
       ? ` · ${formatTime(snapshot.currentTime)}/${formatTime(snapshot.duration)}`

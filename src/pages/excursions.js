@@ -1,6 +1,8 @@
 import { card } from "../components/card.js";
 import { button, linkButton } from "../components/button.js";
+import { mascotCat } from "../components/mascotCat.js";
 import { formatMinutes } from "../utils/time.js";
+import { formatTransportMode } from "../utils/labels.js";
 
 /**
  * @param {any} ctx
@@ -11,6 +13,14 @@ export async function excursionsPage(ctx) {
   const routes = await contentService.getRoutes();
 
   const body = `
+    ${mascotCat({
+      variant: "excursions",
+      src: "/assets/mascot/cat-guide.png",
+      alt: "Кот-проводник",
+      compact: true,
+      message: "Выбирайте маршрут по настроению: каждый раскрывает финансовую историю города через реальные места.",
+    })}
+
     <div class="stack">
       ${routes
         .map((route) => {
@@ -23,17 +33,17 @@ export async function excursionsPage(ctx) {
                 <h3>${route.title}</h3>
                 <p class="text-muted">${route.description}</p>
                 <div class="tag-row">
-                  <span class="tag">${route.points.length} points</span>
-                  <span class="tag">${formatMinutes(duration)} by ${state.selectedTransport}</span>
+                  <span class="tag">${route.points.length} точек</span>
+                  <span class="tag">${formatMinutes(duration)} · ${formatTransportMode(state.selectedTransport)}</span>
                 </div>
               </div>
               <div class="inline-actions">
                 ${button({
-                  label: isActive ? "Selected" : "Select",
+                  label: isActive ? "Выбрано" : "Выбрать",
                   variant: "primary",
                   attrs: `data-select-route="${route.id}" ${isActive ? "disabled" : ""}`,
                 })}
-                ${linkButton({ label: "Transport", href: "#/transport" })}
+                ${linkButton({ label: "Выбрать транспорт", href: "#/transport" })}
               </div>
             </article>
           `;
@@ -45,13 +55,13 @@ export async function excursionsPage(ctx) {
   return {
     activeNav: "excursions",
     html: card({
-      title: "Choose an excursion",
-      subtitle: "Select a route to start a self-guided walking tour.",
+      title: "Экскурсии",
+      subtitle: "Выберите маршрут и начните расследование финансовых историй Нижнего.",
       body,
       footer: `
         <div class="inline-actions">
-          ${linkButton({ label: "Back home", href: "#/home" })}
-          ${linkButton({ label: "Start run", href: "#/run", variant: "primary" })}
+          ${linkButton({ label: "На главную", href: "#/home" })}
+          ${linkButton({ label: "Начать маршрут", href: "#/run", variant: "primary" })}
         </div>
       `,
     }),

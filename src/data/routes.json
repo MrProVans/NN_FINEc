@@ -1,32 +1,47 @@
 [
   {
     "id": "route-1",
-    "slug": "financial-nizhny",
-    "title": "Financial Code: Центр Нижнего",
-    "description": "Пешеходная экскурсия о финансовых аферах, банках и экономической истории города.",
-    "theme": "Финансовая грамотность через историю города",
+    "slug": "po-stopam-moshennika",
+    "title": "Нижний Новгород: по стопам мошенника",
+    "description": "Главный городской маршрут о банковских аферах, доверии и финансовой безопасности.",
+    "theme": "Историческое расследование о деньгах, рисках и личной ответственности",
     "coverImage": "./assets/images/routes/route1.jpg",
     "startPointId": "point-1",
     "transportDurations": {
-      "walk": 120,
-      "scooter": 105,
-      "car": 90
+      "walk": 125,
+      "scooter": 95,
+      "car": 80
     },
     "points": ["point-1", "point-2", "point-3", "point-4"]
   },
   {
     "id": "route-2",
-    "slug": "banks-and-fraud",
-    "title": "Банки и мошенничество XIX-XX века",
-    "description": "Короткий маршрут по местам, связанным с банковскими практиками и резонансными аферами.",
-    "theme": "История финансовых рисков",
+    "slug": "kupecheskie-riski",
+    "title": "Истории финансовых афер Нижнего Новгорода",
+    "description": "Маршрут по городским точкам, где особенно заметны механики обмана, давления и ошибок доверия.",
+    "theme": "Как аферы в городской среде учат финансовой осторожности",
     "coverImage": "./assets/images/routes/route2.jpg",
     "startPointId": "point-5",
     "transportDurations": {
-      "walk": 90,
-      "scooter": 75,
-      "car": 60
+      "walk": 85,
+      "scooter": 65,
+      "car": 50
     },
     "points": ["point-5", "point-6", "point-7"]
+  },
+  {
+    "id": "route-3",
+    "slug": "yarmarochnyy-sled",
+    "title": "Банковская история Нижнего Новгорода",
+    "description": "Маршрут по адресам банковской и купеческой истории о рисках, проверке партнеров и цене доверия.",
+    "theme": "Банки, кредитные решения и культура финансовой проверки",
+    "coverImage": "./assets/images/routes/route3.jpg",
+    "startPointId": "point-8",
+    "transportDurations": {
+      "walk": 75,
+      "scooter": 55,
+      "car": 40
+    },
+    "points": ["point-8", "point-9", "point-10"]
   }
 ]
