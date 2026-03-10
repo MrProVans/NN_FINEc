@@ -66,7 +66,7 @@ export function bindAudioPlayer(root, { audioService }) {
         await audioService.play(src);
       } catch {
         if (statusNode) {
-          statusNode.textContent = "Не удалось запустить аудио.";
+          statusNode.textContent = "Аудио недоступно для этой точки.";
         }
       }
       return;

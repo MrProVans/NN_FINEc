@@ -31,6 +31,8 @@ export async function articleDetailsPage(ctx) {
     ? `
       ${mascotCat({
         variant: "article",
+        src: "/assets/mascot/cat-phone.png",
+        alt: "Кот-проводник у материалов маршрута",
         compact: true,
         message: "Сопоставьте факты из истории с тем, как похожие схемы работают в цифровой среде сегодня.",
       })}

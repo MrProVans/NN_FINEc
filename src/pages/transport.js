@@ -17,7 +17,7 @@ export async function transportPage(ctx) {
       html: card({
         title: "Транспорт",
         body: `<p class="text-muted">Сначала выберите маршрут.</p>`,
-        footer: linkButton({ label: "К выбору маршрута", href: "#/excursions", variant: "primary" }),
+        footer: linkButton({ label: "Выбрать маршрут", href: "#/excursions", variant: "primary" }),
       }),
     };
   }
@@ -29,7 +29,7 @@ export async function transportPage(ctx) {
       activeNav: "excursions",
       html: card({
         title: "Транспорт",
-        body: `<p class="text-muted">Выбранный маршрут недоступен.</p>`,
+        body: `<p class="text-muted">Данные маршрута недоступны.</p>`,
         footer: linkButton({ label: "Выбрать маршрут", href: "#/excursions", variant: "primary" }),
       }),
     };
@@ -40,6 +40,8 @@ export async function transportPage(ctx) {
   const body = `
     ${mascotCat({
       variant: "transport",
+      src: "/assets/mascot/cat-scooter.png",
+      alt: "Кот-проводник на самокате",
       compact: true,
       message: "Темп экскурсии влияет на длительность. Выберите удобный способ передвижения.",
     })}
@@ -77,7 +79,7 @@ export async function transportPage(ctx) {
       footer: `
         <div class="inline-actions">
           ${linkButton({ label: "Назад", href: "#/excursions" })}
-          ${linkButton({ label: "К маршруту", href: "#/run", variant: "primary" })}
+          ${linkButton({ label: "Продолжить маршрут", href: "#/run", variant: "primary" })}
         </div>
       `,
     }),

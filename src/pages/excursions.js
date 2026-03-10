@@ -15,6 +15,8 @@ export async function excursionsPage(ctx) {
   const body = `
     ${mascotCat({
       variant: "excursions",
+      src: "/assets/mascot/cat-guide.png",
+      alt: "Кот-проводник",
       compact: true,
       message: "Выбирайте маршрут по настроению: каждый раскрывает финансовую историю города через реальные места.",
     })}
@@ -41,7 +43,7 @@ export async function excursionsPage(ctx) {
                   variant: "primary",
                   attrs: `data-select-route="${route.id}" ${isActive ? "disabled" : ""}`,
                 })}
-                ${linkButton({ label: "Транспорт", href: "#/transport" })}
+                ${linkButton({ label: "Выбрать транспорт", href: "#/transport" })}
               </div>
             </article>
           `;
@@ -59,7 +61,7 @@ export async function excursionsPage(ctx) {
       footer: `
         <div class="inline-actions">
           ${linkButton({ label: "На главную", href: "#/home" })}
-          ${linkButton({ label: "Продолжить маршрут", href: "#/run", variant: "primary" })}
+          ${linkButton({ label: "Начать маршрут", href: "#/run", variant: "primary" })}
         </div>
       `,
     }),

@@ -12,6 +12,8 @@ export async function articlesPage(ctx) {
   const body = `
     ${mascotCat({
       variant: "article",
+      src: "/assets/mascot/cat-phone.png",
+      alt: "Кот-проводник у статей маршрута",
       compact: true,
       message: "Статьи открываются по мере прохождения маршрута и помогают связать историю места с рисками сегодняшнего дня.",
     })}

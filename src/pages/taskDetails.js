@@ -26,6 +26,8 @@ export async function taskDetailsPage(ctx) {
     : `
       ${mascotCat({
         variant: "task",
+        src: "/assets/mascot/cat-task.png",
+        alt: "Кот-проводник с заданием",
         compact: true,
         message: "Разберите ситуацию как детектив: где риск, где доверие и где ошибка в решении.",
       })}
@@ -36,7 +38,7 @@ export async function taskDetailsPage(ctx) {
         <span class="tag status-${details.status}">${formatTaskStatus(details.status)}</span>
       </div>
       ${button({
-        label: details.status === "completed" ? "Выполнено" : "Отметить как выполненное",
+        label: details.status === "completed" ? "Выполнено" : "Отметить выполненным",
         variant: "primary",
         attrs: `data-complete-task ${details.canComplete ? "" : "disabled"}`,
       })}

@@ -69,6 +69,8 @@ export async function runPage(ctx) {
 
     ${mascotCat({
       variant: "run",
+      src: "/assets/mascot/cat-phone.png",
+      alt: "Кот-проводник на маршруте",
       compact: true,
       message: "Ищите детали на месте: по ним открываются статьи и задания.",
     })}
@@ -86,7 +88,7 @@ export async function runPage(ctx) {
       </header>
       <p>${currentPoint.fullDescription}</p>
       <p><strong>Финансовый вывод:</strong> ${currentPoint.financialInsight}</p>
-      <p><strong>Навигация:</strong> ${currentPoint.logistics}</p>
+      <p><strong>Как пройти:</strong> ${currentPoint.logistics}</p>
 
       ${audioPlayer({
         pointId: currentPoint.id,
@@ -109,7 +111,7 @@ export async function runPage(ctx) {
 
       <div class="inline-actions">
         ${button({
-          label: reached ? "Точка достигнута" : "Я на точке",
+          label: reached ? "Точка пройдена" : "Я на точке",
           variant: "primary",
           attrs: `data-manual-reach ${(geolocationSupported && !demoModeEnabled) ? "hidden" : ""} ${reached ? "disabled" : ""}`,
         })}
@@ -145,7 +147,7 @@ export async function runPage(ctx) {
       body,
       footer: `
         <div class="inline-actions">
-          ${linkButton({ label: "Транспорт", href: "#/transport" })}
+          ${linkButton({ label: "Выбрать транспорт", href: "#/transport" })}
           ${linkButton({ label: "Задания", href: "#/tasks" })}
           ${linkButton({ label: "Статьи", href: "#/articles" })}
         </div>
@@ -220,9 +222,9 @@ export async function runPage(ctx) {
           const mapPanelNode = mapContainer.closest(".map-panel");
           if (mapPanelNode) {
             mapPanelNode.classList.add("map-panel--fallback");
-            mapPanelNode.innerHTML = "<p>Карта временно недоступна.</p>";
+            mapPanelNode.innerHTML = "<p>Карта недоступна. Добавьте ключ Yandex Maps API.</p>";
           }
-          setStatus("Карта временно недоступна.");
+          setStatus("Карта недоступна. Добавьте ключ Yandex Maps API.");
         }
       }
 
@@ -286,12 +288,12 @@ export async function runPage(ctx) {
         }
 
         if (error.code === 2) {
-          setStatus("Не удалось определить местоположение. Можно продолжить вручную.");
+          setStatus("Геолокация недоступна. Вы можете пройти маршрут вручную.");
           return;
         }
 
         if (error.code === 3) {
-          setStatus("Время ожидания геолокации истекло. Можно продолжить вручную.");
+          setStatus("Геолокация недоступна. Вы можете пройти маршрут вручную.");
           return;
         }
 

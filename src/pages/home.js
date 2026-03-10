@@ -65,6 +65,8 @@ export async function homePage(ctx) {
       </p>
       ${mascotCat({
         variant: "hero",
+        src: "/assets/mascot/cat-guide.png",
+        alt: "Кот-проводник",
         message: "Я проведу вас по точкам, где история города учит распознавать финансовые риски.",
       })}
       <div class="inline-actions">

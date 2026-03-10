@@ -66,9 +66,7 @@ export function mascotCat({ message, variant = "hero", src = "", alt = "", compa
           loading="lazy"
           onerror="this.closest('[data-mascot-media]')?.classList.add('is-missing')"
         />
-        <div class="mascot__fallback" aria-hidden="true">
-          <span>Кот</span>
-        </div>
+        <div class="mascot__fallback" aria-hidden="true"></div>
       </div>
       <div class="mascot__speech">
         <strong>${config.title}</strong>
