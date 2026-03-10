@@ -37,7 +37,7 @@
 
 .topbar__nav {
   display: flex;
-  gap: 8px;
+  gap: 20px;
   overflow-x: auto;
   padding-bottom: 2px;
 }
