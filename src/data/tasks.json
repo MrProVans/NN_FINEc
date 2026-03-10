@@ -68,35 +68,5 @@
     "description": "Опишите 3 признака «здорового» финансового договора, который защищает обе стороны.",
     "rewardPoints": 18,
     "canSkip": false
-  },
-  {
-    "id": "task-8",
-    "routeId": "route-3",
-    "pointId": "point-8",
-    "title": "Бюджет без ловушек",
-    "type": "observation",
-    "description": "Сформулируйте правило личного бюджета, которое защитит от жизни «от зарплаты до зарплаты».",
-    "rewardPoints": 12,
-    "canSkip": true
-  },
-  {
-    "id": "task-9",
-    "routeId": "route-3",
-    "pointId": "point-9",
-    "title": "Проверка делового партнера",
-    "type": "analysis",
-    "description": "Назовите 3 пункта проверки контрагента перед подписанием договора или выдачей отсрочки.",
-    "rewardPoints": 16,
-    "canSkip": true
-  },
-  {
-    "id": "task-10",
-    "routeId": "route-3",
-    "pointId": "point-10",
-    "title": "Анти-аферный чек-лист",
-    "type": "quiz",
-    "description": "Соберите короткий чек-лист из 5 пунктов: что проверять перед любым финансовым обязательством.",
-    "rewardPoints": 20,
-    "canSkip": false
   }
 ]
