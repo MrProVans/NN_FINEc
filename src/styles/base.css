@@ -57,7 +57,7 @@ img {
 .topbar__nav {
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: 40px !important;
 }
 
 .topbar__brand {
