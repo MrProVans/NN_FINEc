@@ -1,154 +1,158 @@
+/** @typedef {import("../state/store.js").Store} Store */
+
+export const ALLOWED_AUDIO_SPEEDS = [0.75, 1, 1.25, 1.5];
+
 /**
- * Централизованный сервис для воспроизведения аудио.
- * Работает с локальными файлами из public/assets/audio
- * и корректно собирает URL для Vite + GitHub Pages.
+ * @param {{ store: Store }} options
  */
+export function createAudioService({ store }) {
+  const audio = new Audio();
+  audio.preload = "metadata";
 
-function resolveAudioUrl(src) {
-  if (!src || typeof src !== "string") return "";
+  /** @type {Set<(snapshot: ReturnType<typeof getSnapshot>) => void>} */
+  const listeners = new Set();
+  let currentSrc = "";
+  let errorMessage = "";
 
-  // Внешние ссылки оставляем как есть
-  if (/^https?:\/\//i.test(src)) {
-    return src;
-  }
-
-  // Убираем ./ или / в начале
-  const normalized = src.replace(/^\.?\//, "");
-
-  // BASE_URL нужен для GitHub Pages, например /NN_FINEc/
-  const base = import.meta.env.BASE_URL || "/";
-
-  return `${base}${normalized}`.replace(/([^:]\/)\/+/g, "$1");
-}
-
-class AudioService {
-  constructor() {
-    this.audio = new Audio();
-    this.audio.preload = "metadata";
-
-    this.currentSrc = "";
-    this.speed = 1;
-    this.status = "idle";
-    this.error = null;
-    this.listeners = new Set();
-
-    this.audio.addEventListener("play", () => {
-      this.status = "playing";
-      this.error = null;
-      this.emit();
-    });
-
-    this.audio.addEventListener("pause", () => {
-      if (this.audio.currentTime > 0 && !this.audio.ended) {
-        this.status = "paused";
-        this.emit();
-      }
-    });
-
-    this.audio.addEventListener("ended", () => {
-      this.status = "ended";
-      this.emit();
-    });
-
-    this.audio.addEventListener("error", () => {
-      this.status = "error";
-      this.error = "Аудиофайл недоступен или поврежден.";
-      this.emit();
-    });
-
-    this.audio.addEventListener("loadedmetadata", () => {
-      this.emit();
-    });
-  }
-
-  subscribe(listener) {
-    this.listeners.add(listener);
-    listener(this.getState());
-
-    return () => {
-      this.listeners.delete(listener);
-    };
-  }
-
-  emit() {
-    const state = this.getState();
-    this.listeners.forEach((listener) => listener(state));
-  }
-
-  getState() {
+  function getSnapshot() {
     return {
-      src: this.currentSrc,
-      resolvedSrc: resolveAudioUrl(this.currentSrc),
-      speed: this.speed,
-      status: this.status,
-      error: this.error,
-      duration: Number.isFinite(this.audio.duration) ? this.audio.duration : 0,
-      currentTime: this.audio.currentTime || 0,
+      src: currentSrc,
+      isPlaying: !audio.paused,
+      currentTime: audio.currentTime,
+      duration: Number.isFinite(audio.duration) ? audio.duration : 0,
+      speed: audio.playbackRate,
+      hasError: errorMessage !== "",
+      errorMessage,
     };
   }
 
-  setSource(src) {
-    if (!src) {
-      this.stop();
-      this.currentSrc = "";
-      this.audio.removeAttribute("src");
-      this.audio.load();
-      this.status = "idle";
-      this.error = null;
-      this.emit();
-      return;
-    }
-
-    if (src === this.currentSrc) return;
-
-    this.currentSrc = src;
-    this.audio.src = resolveAudioUrl(src);
-    this.audio.playbackRate = this.speed;
-    this.status = "ready";
-    this.error = null;
-    this.emit();
-  }
-
-  async play(src) {
-    if (src) {
-      this.setSource(src);
-    }
-
-    if (!this.currentSrc) {
-      this.status = "error";
-      this.error = "Для этой точки не задан аудиофайл.";
-      this.emit();
-      return;
-    }
-
-    try {
-      await this.audio.play();
-    } catch (error) {
-      this.status = "error";
-      this.error = "Не удалось запустить воспроизведение.";
-      this.emit();
+  function emit() {
+    const snapshot = getSnapshot();
+    for (const listener of listeners) {
+      listener(snapshot);
     }
   }
 
-  pause() {
-    this.audio.pause();
+  audio.addEventListener("play", () => {
+    errorMessage = "";
+    emit();
+  });
+  audio.addEventListener("pause", emit);
+  audio.addEventListener("ended", emit);
+  audio.addEventListener("timeupdate", emit);
+  audio.addEventListener("error", () => {
+    errorMessage = "Аудиофайл недоступен или поврежден.";
+    emit();
+  });
+
+  setSpeed(store.getState().audioSpeed);
+
+  /**
+   * @param {string} src
+   * @returns {string}
+   */
+  function normalizeAudioSrc(src) {
+    const raw = String(src || "").trim();
+    if (!raw) {
+      return "";
+    }
+
+    if (/^https?:\/\//i.test(raw)) {
+      // Convert Google Drive share links to direct file access links.
+      if (raw.includes("drive.google.com")) {
+        const match = raw.match(/\/file\/d\/([^/]+)/);
+        if (match?.[1]) {
+          return `https://drive.google.com/uc?export=download&id=${match[1]}`;
+        }
+
+        try {
+          const url = new URL(raw);
+          const id = url.searchParams.get("id");
+          if (id) {
+            return `https://drive.google.com/uc?export=download&id=${id}`;
+          }
+        } catch {
+          // Ignore parse failures and return original URL.
+        }
+      }
+
+      return raw;
+    }
+
+    if (raw.startsWith("./assets/") || raw.startsWith("assets/") || raw.startsWith("/assets/")) {
+      const cleaned = raw
+          .replace(/^\.\//, "")
+          .replace(/^\/+/, "");
+      const base = import.meta.env.BASE_URL || "/";
+      const normalizedBase = base.endsWith("/") ? base : `${base}/`;
+      return `${normalizedBase}${cleaned}`;
+    }
+
+    return raw;
   }
 
-  stop() {
-    this.audio.pause();
-    this.audio.currentTime = 0;
-    this.status = "stopped";
-    this.emit();
+  /**
+   * @param {string} src
+   */
+  async function play(src) {
+    const normalizedSrc = normalizeAudioSrc(src);
+    if (!normalizedSrc) {
+      throw new Error("Источник аудио не настроен.");
+    }
+
+    if (normalizedSrc !== currentSrc) {
+      currentSrc = normalizedSrc;
+      errorMessage = "";
+      audio.src = normalizedSrc;
+      audio.load();
+    }
+
+    audio.playbackRate = store.getState().audioSpeed;
+    await audio.play();
+    emit();
   }
 
-  setSpeed(speed) {
-    this.speed = speed;
-    this.audio.playbackRate = speed;
-    this.emit();
+  function pause() {
+    audio.pause();
+    emit();
   }
+
+  function stop() {
+    audio.pause();
+    audio.currentTime = 0;
+    emit();
+  }
+
+  /**
+   * @param {number} speed
+   */
+  function setSpeed(speed) {
+    if (!ALLOWED_AUDIO_SPEEDS.includes(speed)) {
+      return false;
+    }
+
+    audio.playbackRate = speed;
+    store.setAudioSpeed(speed);
+    emit();
+    return true;
+  }
+
+  /**
+   * @param {(snapshot: ReturnType<typeof getSnapshot>) => void} listener
+   */
+  function subscribe(listener) {
+    listeners.add(listener);
+    listener(getSnapshot());
+    return () => listeners.delete(listener);
+  }
+
+  return {
+    play,
+    pause,
+    stop,
+    setSpeed,
+    subscribe,
+    getSnapshot,
+    getAllowedSpeeds: () => [...ALLOWED_AUDIO_SPEEDS],
+  };
 }
-
-const audioService = new AudioService();
-
-export { resolveAudioUrl };
-export default audioService;
