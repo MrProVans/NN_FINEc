@@ -16,24 +16,33 @@
 
 .btn:hover {
   border-color: rgba(31, 143, 158, 0.62);
+  display: flex;
   justify-content: center;
+  gap: 40px !important;
 }
 
 .btn:disabled {
   opacity: 0.45;
   cursor: not-allowed;
+  display: flex;
   justify-content: center;
+  gap: 40px !important;
 }
 
 .btn--primary {
   background: linear-gradient(140deg, rgba(31, 143, 158, 0.18), rgba(42, 169, 154, 0.24));
   border-color: rgba(25, 126, 140, 0.7);
+  display: flex;
+  justify-content: center;
+  gap: 40px !important;
 }
 
 .btn--danger {
   background: linear-gradient(140deg, rgba(198, 77, 94, 0.16), rgba(198, 77, 94, 0.1));
   border-color: rgba(198, 77, 94, 0.55);
+  display: flex;
   justify-content: center;
+  gap: 40px !important;
 }
 
 .card {
