@@ -109,6 +109,7 @@
   align-items: center;
   justify-content: flex-start;
   background: rgba(236, 248, 247, 0.72);
+  margin-bottom: 1rem;
 }
 
 .hero .mascot {
