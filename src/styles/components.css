@@ -68,7 +68,6 @@
   border-radius: 20px;
   padding: 18px;
   color: #e7fffb;
-  text-align: center;
   background:
     radial-gradient(circle at 80% 16%, rgba(55, 196, 176, 0.26), transparent 35%),
     linear-gradient(155deg, rgba(8, 54, 61, 0.95), rgba(7, 41, 48, 0.95));
@@ -83,6 +82,7 @@
 .hero__kicker {
   display: inline-flex;
   align-self: start;
+  text-align: center;
   margin-bottom: 8px;
   padding: 4px 10px;
   border-radius: 999px;
