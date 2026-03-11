@@ -121,8 +121,8 @@
 }
 
 .mascot__media {
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 150px;
   border-radius: 14px;
   overflow: hidden;
   background: linear-gradient(140deg, rgba(31, 143, 158, 0.22), rgba(42, 169, 154, 0.22));
