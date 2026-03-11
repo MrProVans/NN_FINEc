@@ -68,13 +68,6 @@ img {
   text-align: center;
 }
 
-.about-image {
-  width: 100% !important;
-  max-width: 500px !important;
-  display: block !important;
-  margin: 20px auto !important;
-  border-radius: 12px !important;
-}
 
 .stack {
   display: grid;
@@ -127,4 +120,17 @@ img {
 a[aria-disabled="true"] {
   pointer-events: none;
   opacity: 0.5;
+}
+
+.about-image {
+  width: 100% !important;
+  max-width: 500px !important;
+  display: block !important;
+  margin: 20px auto !important;
+  border-radius: 12px !important;
+}
+
+.stack img {
+  width: 100%;
+  height: auto;
 }
