@@ -7,7 +7,7 @@ import { linkButton } from "../components/button.js";
 export async function aboutPage(_ctx) {
   const body = `
     <section class="stack">
-      <img src="assets/bank.jpg" class="about-image">
+      <img src="assets/bank.png" class="about-image">
       <p>
         «ФинКод — Нижний Новгород: по стопам мошенника» — мобильный маршрут о том, как
         в городской истории переплетались деньги, доверие, аферы и ответственность.
