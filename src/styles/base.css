@@ -68,6 +68,14 @@ img {
   text-align: center;
 }
 
+.about-image {
+  width: 100%;
+  max-width: 500px;
+  display: block;
+  margin: 20px auto;
+  border-radius: 12px;
+}
+
 .stack {
   display: grid;
   gap: 12px;
