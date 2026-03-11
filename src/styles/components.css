@@ -98,6 +98,7 @@
 .hero p {
   color: rgba(230, 249, 245, 0.9);
   line-height: 1.48;
+  text-align: center;
 }
 
 .mascot {
