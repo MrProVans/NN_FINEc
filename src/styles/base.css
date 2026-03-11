@@ -126,7 +126,7 @@ a[aria-disabled="true"] {
   width: 100% !important;
   max-width: 500px !important;
   display: block !important;
-  margin: 20px auto !important;
+  margin: 2px auto !important;
   border-radius: 12px !important;
 }
 
