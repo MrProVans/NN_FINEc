@@ -64,6 +64,10 @@ img {
   text-align: center;
 }
 
+.about-page h2 {
+  text-align: center;
+}
+
 .stack {
   display: grid;
   gap: 12px;
